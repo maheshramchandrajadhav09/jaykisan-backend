@@ -1,14 +1,15 @@
-# Dockerfile
+# FastAPI backend साठी Dockerfile
 FROM python:3.11-slim
 
+# Workdir सेट कर
 WORKDIR /app
 
 # dependencies install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy code
+# उर्वरित कोड कॉपी कर
 COPY . .
 
-# run uvicorn server on port 8080
+# uvicorn ने run करायचं
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
