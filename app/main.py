@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from app.models import ScheduleRequest, ScheduleResponse
-from app.sample_data import generate_sample_schedule  # schedule तयार करणारी फाइल import
+from app.models import ScheduleResponse, ScheduleItem, InputItem, ScheduleRequest
 
 app = FastAPI(
     title="Jay Kisan Backend API",
@@ -8,15 +7,25 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Root endpoint
 @app.get("/")
 def root():
     return {"message": "✅ Jay Kisan Backend चालू आहे! Swagger UI: /docs"}
 
-# Schedule API
 @app.post("/api/v1/schedule", response_model=ScheduleResponse)
 def get_schedule(req: ScheduleRequest):
-    """
-    दिलेल्या cropId, sowingDate आणि farmingType वरून पिकाचे schedule तयार करतो.
-    """
-    return generate_sample_schedule(req.cropId, req.farmingType, req.sowingDate)
+    return ScheduleResponse(
+        cropId=req.cropId,
+        displayName=req.cropId,
+        farmingType=req.farmingType,
+        sowingDate=req.sowingDate,
+        schedule=[
+            ScheduleItem(
+                dateMillis=req.sowingDate,
+                dateString="Day 1",
+                task="पेरणी तयारी",
+                inputs=[InputItem(name="बी-बियाणे", qty="10kg", cost=500)]
+            )
+        ],
+        costEstimate={"total": 500},
+        sources=["Sample data"]
+    )
