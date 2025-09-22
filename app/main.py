@@ -1,3 +1,9 @@
+import os
+print("📢 Starting FastAPI App")
+print("📂 Current Directory:", os.getcwd())
+print("📄 Files inside app/:", os.listdir(os.path.dirname(__file__)))
+
+
 from fastapi import FastAPI
 from app.models import ScheduleResponse, ScheduleRequest
 from app.sample_data import generate_sample_schedule
