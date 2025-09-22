@@ -12,10 +12,10 @@ class ScheduleItem(BaseModel):
     task: str
     inputs: List[InputItem] = []
 
-class ScheduleRequest(BaseModel):   # 🔑 हे नव्याने जोडायचं आहे
+class ScheduleRequest(BaseModel):
     cropId: str
-    sowingDate: int
-    farmingType: str
+    sowingDate: int   # millis
+    farmingType: str  # "sindriya" / "rasayanik"
 
 class ScheduleResponse(BaseModel):
     cropId: str
