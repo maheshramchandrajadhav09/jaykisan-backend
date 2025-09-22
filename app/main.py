@@ -1,17 +1,26 @@
 from fastapi import FastAPI
-from app.models import ScheduleRequest, ScheduleResponse
+from app.models import ScheduleResponse, ScheduleRequest
 from app.sample_data import generate_sample_schedule
 
 app = FastAPI(
     title="Jay Kisan Backend API",
-    description="🚜 API शेतकऱ्यांना पिकाचे schedule देण्यासाठी तयार केले आहे 🌱",
+    description="🚜 हे API शेतकऱ्यांना पिकाचे schedule देण्यासाठी तयार केले आहे",
     version="1.0.0"
 )
 
+# Root endpoint (Test purpose)
 @app.get("/")
 def root():
     return {"message": "✅ Jay Kisan Backend चालू आहे! Swagger UI: /docs"}
 
+# Schedule API
 @app.post("/api/v1/schedule", response_model=ScheduleResponse)
 def get_schedule(req: ScheduleRequest):
-    return generate_sample_schedule(req.cropId, req.farmingType, req.sowingDate)
+    """
+    दिलेल्या cropId, sowingDate आणि farmingType वरून पिकाचे schedule तयार करून परत करतो
+    """
+    return generate_sample_schedule(
+        crop_id=req.cropId,
+        farming_type=req.farmingType,
+        sowing_date=req.sowingDate
+    )
