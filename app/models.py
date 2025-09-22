@@ -12,7 +12,7 @@ class ScheduleItem(BaseModel):
     task: str
     inputs: List[InputItem] = []
 
-class ScheduleRequest(BaseModel):
+class ScheduleRequest(BaseModel):   # 🔑 हे नव्याने जोडायचं आहे
     cropId: str
     sowingDate: int
     farmingType: str
