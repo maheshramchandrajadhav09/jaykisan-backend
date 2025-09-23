@@ -5,8 +5,8 @@ print("📄 Files inside app/:", os.listdir(os.path.dirname(__file__)))
 
 
 from fastapi import FastAPI
-from app.models import ScheduleResponse, ScheduleRequest
-from app.sample_data import generate_sample_schedule
+from models import ScheduleResponse, ScheduleRequest
+from sample_data import generate_sample_schedule
 
 app = FastAPI(
     title="Jay Kisan Backend API",
